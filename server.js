@@ -10,7 +10,7 @@ const logger = require('morgan');
 
 // Controllers
 const authCtrl = require('./controllers/auth');
-const treeCtrl=require('./controllers/tree')
+const treeCtrl=require('./controllers/trees')
 
 // Middleware
 const verifyToken = require('./middleware/verify-token');
