@@ -12,11 +12,11 @@ const duckShema = new mongoose.Schema({
         required: true
     },
   gender: {
-    type: Enum,
+    type: String,
     required: true
   },
   dateOfBirth:{
-    type:Date,
+    type:String,
   required:true
   },
   image:{
