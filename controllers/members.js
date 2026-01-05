@@ -10,7 +10,7 @@ const router =express.Router();
 
 
 //create a new ..post/ducks/
-router.post('/',async (req,res)=>{
+router.post('/tree/:id/member',async (req,res)=>{
     try{
         console.log('error')
         const duck = await Duck.create(req.body);
@@ -22,7 +22,7 @@ router.post('/',async (req,res)=>{
 })
 
 // READ - GET -(index) /ducks - GET+/ducks
-router.get('/', async (req, res) => {
+router.get('/tree/:id/member', async (req, res) => {
   // Setting up for our code
   try{
     const ducks =await Duck.find({});
@@ -35,7 +35,7 @@ router.get('/', async (req, res) => {
 });
 
 // show route for one record :id -GET+/ducks/123
-router.get('/:id',async(req,res)=>{
+router.get('/tree/:id/member/:id',async(req,res)=>{
     try{
         //git the id from the param then find-by id
         // if we dont get a duck respond with 404 else send 200 with duck
@@ -53,7 +53,7 @@ router.get('/:id',async(req,res)=>{
 })
 
 //delete a duck -DEL+/ducks/123
-router.delete('/:id',async(req,res)=>{
+router.delete('/tree/:id/member/:id',async(req,res)=>{
     try{
       
         const {id} =req.params // get the id from params
@@ -73,7 +73,7 @@ router.delete('/:id',async(req,res)=>{
 
 
 //updating - PUT + /ducks/123
-router.put('/:id',async(req,res)=>{
+router.put('/tree/:id/member/:id',async(req,res)=>{
     try{
         const {id}=req.params;
          const duck = await Duck.findByIdAndUpdate(id,req.body,{new:true})
