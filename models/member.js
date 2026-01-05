@@ -21,7 +21,24 @@ const duckShema = new mongoose.Schema({
   },
   image:{
 type: String,
-required:true}
+required:true},
+  generation: { 
+type: Number,
+min:1, // رقم الجيل اذا1 الجد اذا 2 الاب اذا 3 الاولاد 
+required: true },
+// 1.نربط الشجره بالعائله لنستخدم المكتبه 
+  treeId: { 
+    type: mongoose.Schema.Types.ObjectId, 
+    ref: 'Tree', 
+    required: true 
+  },
+
+  // 2. ربط الشخص بوالده 
+  parentId: { 
+    type: mongoose.Schema.Types.ObjectId, 
+    ref: 'Duck', 
+    default: null //اذا اخترنا null يكون الجد 
+  }
 })
 
 //initialize the mogose model
