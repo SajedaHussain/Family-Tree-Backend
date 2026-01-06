@@ -8,7 +8,6 @@ const express = require('express')
 //initialize the router
 const router =express.Router();
 
-
 const verifyAccess = async (treeCode, code) => {
     const targetTree = await Tree.findById(treeCode);
     if (!targetTree)                    
@@ -29,7 +28,7 @@ router.post('/',async (req,res)=>{
             return res.status(access.status).json({ error: access.error });
 
         const member = await Member.create(req.body);
-        res.status(201).json({ Member });
+        res.status(201).json({ member });
     }catch(error){
         console.log(error)
         res.status(500).json({error:"fail to create duck"}) // 500 means error
