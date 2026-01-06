@@ -1,6 +1,6 @@
-// controllers/Ducks.js
+// controllers/Members.js
 //requir the model
-const Duck = require('../models/member');
+const Member = require('../models/member');
 const Tree = require('../models/tree');
 //require express
 const express = require('express')
@@ -9,8 +9,8 @@ const express = require('express')
 const router =express.Router();
 
 
-const verifyAccess = async (treeId, code) => {
-    const targetTree = await Tree.findById(treeId);
+const verifyAccess = async (treeCode, code) => {
+    const targetTree = await Tree.findById(treeCode);
     if (!targetTree)                    
         return { error: "tree is not defined", status: 404 };
     if (targetTree.code !== code) 
@@ -22,14 +22,14 @@ const verifyAccess = async (treeId, code) => {
 //create a new ..post/ducks/
 router.post('/',async (req,res)=>{
     try{
-        const { treeId, code } = req.body; 
-        const access = await verifyAccess(treeId, code);
+        const { treeCode, code } = req.body; 
+        const access = await verifyAccess(treeCode, code);
 
         if (access.error) 
             return res.status(access.status).json({ error: access.error });
 
-        const duck = await Duck.create(req.body);
-        res.status(201).json({ duck });
+        const member = await Member.create(req.body);
+        res.status(201).json({ Member });
     }catch(error){
         console.log(error)
         res.status(500).json({error:"fail to create duck"}) // 500 means error
@@ -40,16 +40,16 @@ router.post('/',async (req,res)=>{
 router.get('/', async (req, res) => {
   // Setting up for our code
   try{
-   const { treeId, code } = req.query;
+   const { treeCode, code } = req.query;
     let filter = {};
-       if (treeId) filter.treeId = treeId;//اذا ارسل treeId سيقوم باحضار البط للشجره المحدده 
+       if (treeCode) filter.treeCode = treeCode;//اذا ارسل treeId سيقوم باحضار البط للشجره المحدده 
 
-     const ducks = await Duck.find(filter).populate('parentId', 'firstName lastName');//populate-->{ابحث عن الشخص الذي لديه ال ID و احضره لهنا }
+     const member = await Member.find(filter).populate('parentId', 'firstName lastName');//populate-->{ابحث عن الشخص الذي لديه ال ID و احضره لهنا }
      //البارامتر الأولparentId-->(اين نريد تعبئه البيانات )  //البارامتر الثاني ('firstName lastName')-->المعلومات التي نريد تعبئتها 
-     res.status(200).json({ ducks });
+     res.status(200).json({ member });
   }catch(error){
     console.log(error)
-    res.status(500).json({error:"fail to get ducks"})
+    res.status(500).json({error:"fail to get member"})
   }
 });
 
@@ -59,11 +59,11 @@ router.get('/:id',async(req,res)=>{
         //git the id from the param then find-by id
         // if we dont get a duck respond with 404 else send 200 with duck
          const {id} =req.params
-         const duck = await Duck.findById(id)
-         if(!duck){  // if there is no duck wich is null 
+         const member = await Member.findById(id)
+         if(!member){  // if there is no duck wich is null 
          res.status(404).json({error:'duck not found'})
          }else{
-          res.status(200).json({duck})
+          res.status(200).json({member})
          }
     }catch(error){
         console.log(error)
@@ -74,17 +74,17 @@ router.get('/:id',async(req,res)=>{
 //delete a duck -DEL+/ducks/123
 router.delete('/:id',async(req,res)=>{
     try{
-        const { treeId, code } = req.body; 
+        const { treeCode, code } = req.body; 
 
-        const access = await verifyAccess(treeId, code);
+        const access = await verifyAccess(treeCode, code);
         
         if (access.error) return res.status(access.status).json({ error: access.error });
        
-        const duck = await Duck.findByIdAndDelete(req.params.id)  //try to find and delete the duck using the id
-        if(!duck){      //if there is no duck(not null wich is true), send 404
+        const member = await Member.findByIdAndDelete(req.params.id)  //try to find and delete the duck using the id
+        if(!member){      //if there is no duck(not null wich is true), send 404
             res.status(404).json({error:"Duck not found"})
         }else{         //else send back a msg ssys deleted
-            res.status(200).json({duck}) //204 most pouler for deleting it means deleted and no data will be send- json send the duck
+            res.status(200).json({member}) //204 most pouler for deleting it means deleted and no data will be send- json send the duck
         }
         
          }
@@ -98,18 +98,18 @@ router.delete('/:id',async(req,res)=>{
 //updating - PUT + /ducks/123
 router.put('/:id',async(req,res)=>{
     try{
-        const { treeId, code } = req.body; 
+        const { treeCode, code } = req.body; 
 
-        const access = await verifyAccess(treeId, code);
+        const access = await verifyAccess(treeCode, code);
         
         if (access.error) return res.status(access.status).json({ error: access.error });
         
         const {id}=req.params;
-         const duck = await Duck.findByIdAndUpdate(id,req.body,{new:true})
-         if(!duck){
+         const member = await Member.findByIdAndUpdate(id,req.body,{new:true})
+         if(!member){
             res.status(404).json({error:"duck not found"})
          }else{
-            res.status(200).json({duck})
+            res.status(200).json({member})
          }
     }catch(error){
         console.log(error)
