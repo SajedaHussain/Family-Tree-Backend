@@ -1,4 +1,4 @@
-// controllers/Ducks.js
+// controllers/Members.js
 //requir the model
 const Duck = require('../models/member');
 const Tree = require('../models/tree');
@@ -49,7 +49,7 @@ router.get('/', async (req, res) => {
      res.status(200).json({ ducks });
   }catch(error){
     console.log(error)
-    res.status(500).json({error:"fail to get ducks"})
+    res.status(500).json({error:"fail to get member"})
   }
 });
 
@@ -59,11 +59,11 @@ router.get('/:id',async(req,res)=>{
         //git the id from the param then find-by id
         // if we dont get a duck respond with 404 else send 200 with duck
          const {id} =req.params
-         const duck = await Duck.findById(id)
-         if(!duck){  // if there is no duck wich is null 
+         const member = await Member.findById(id)
+         if(!member){  // if there is no duck wich is null 
          res.status(404).json({error:'duck not found'})
          }else{
-          res.status(200).json({duck})
+          res.status(200).json({member})
          }
     }catch(error){
         console.log(error)
@@ -84,7 +84,7 @@ router.delete('/:id',async(req,res)=>{
         if(!duck){      //if there is no duck(not null wich is true), send 404
             res.status(404).json({error:"Duck not found"})
         }else{         //else send back a msg ssys deleted
-            res.status(200).json({duck}) //204 most pouler for deleting it means deleted and no data will be send- json send the duck
+            res.status(200).json({member}) //204 most pouler for deleting it means deleted and no data will be send- json send the duck
         }
         
          }
@@ -105,11 +105,11 @@ router.put('/:id',async(req,res)=>{
         if (access.error) return res.status(access.status).json({ error: access.error });
         
         const {id}=req.params;
-         const duck = await Duck.findByIdAndUpdate(id,req.body,{new:true})
-         if(!duck){
+         const member = await Member.findByIdAndUpdate(id,req.body,{new:true})
+         if(!member){
             res.status(404).json({error:"duck not found"})
          }else{
-            res.status(200).json({duck})
+            res.status(200).json({member})
          }
     }catch(error){
         console.log(error)

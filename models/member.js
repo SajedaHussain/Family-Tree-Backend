@@ -2,21 +2,23 @@
 const mongoose=require('mongoose');
 
 //creat the mongoose schema
-const duckShema = new mongoose.Schema({
+const memberShema = new mongoose.Schema({
      firstName: {
     type: String,
     required: true,
+    trim: true
   },
     lastName:{
         type: String,
-        required: true
+        required: true,
+        trim: true
     },
   gender: {
-    type: String,
+    enum: ["Male","Female"],
     required: true
   },
   dateOfBirth:{
-    type:String,
+    type:Date,
   required:true
   },
   image:{
@@ -42,8 +44,8 @@ required: true },
 })
 
 //initialize the mogose model
-const Duck = mongoose.model('Duck',duckShema)
+const Member = mongoose.model('Member',memberShema)
 
 //export the model
-module.exports = Duck;
+module.exports = Member;
 
