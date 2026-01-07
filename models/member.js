@@ -14,6 +14,7 @@ const memberShema = new mongoose.Schema({
     trim: true
   },
   gender: {
+    type: String,
     enum: ["Male", "Female" , "Parents"],
     required: true
   },
