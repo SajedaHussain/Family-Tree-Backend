@@ -58,7 +58,7 @@ router.delete('/:id',async(req,res)=>{
       const{id}=req.params
       const tree = await Tree.findByIdAndDelete(id)
        if (!tree) {
-            res.status(404).json({error:"pet not found"})
+            res.status(404).json({error:"Tree not found"})
         } else {
             //use status 204 if dont 
             res.status(200).json({ message: "Tree deleted" })
