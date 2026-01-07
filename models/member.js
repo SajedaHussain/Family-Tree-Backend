@@ -14,7 +14,7 @@ const memberShema = new mongoose.Schema({
     trim: true
   },
   gender: {
-    enum: ["Male", "Female"],
+    enum: ["Male", "Female" , "Parents"],
     required: true
   },
   dateOfBirth: {
