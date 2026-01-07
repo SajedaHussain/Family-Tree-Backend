@@ -61,7 +61,7 @@ router.delete('/:id',async(req,res)=>{
             res.status(404).json({error:"pet not found"})
         } else {
             //use status 204 if dont 
-            res.status(204).json({tree})
+            res.status(200).json({ message: "Tree deleted" })
         }
         
     } catch (error) {
