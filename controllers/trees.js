@@ -6,7 +6,7 @@ const router=express.Router();
 
 
 
-//POST
+//POST ==========================================================================================================
 router.post('/',async (req,res)=>{
     try {
         const tree = await Tree.create(req.body)
@@ -16,7 +16,8 @@ router.post('/',async (req,res)=>{
         res.status(500).json({error:"failed to create tree"})
     }
 })
-//Get 
+
+//Get =============================================================================================================
 router.get('/',async(req,res)=>{
     try {
         const tree= await Tree.find({})
@@ -27,7 +28,7 @@ router.get('/',async(req,res)=>{
     }
 
 })
-//Get
+//Get on Tree =====================================================================================================
 router.get('/:id', async(req,res)=>{
     try {
         const{id}=req.params
@@ -38,8 +39,6 @@ router.get('/:id', async(req,res)=>{
             res.status(200).json({tree})
 
         }
-        //else
-        //send 200 with pet
         
     } catch (error) {
         console.log(error)
@@ -47,14 +46,9 @@ router.get('/:id', async(req,res)=>{
      
     }
 })
-//Del 
+//Delete ============================================================================================================== 
 router.delete('/:id',async(req,res)=>{
     try {
-        //get the id from params
-        //try to find and delete the pet using the id
-        //if there is no pet send 404
-        //else 
-        //send back msg to say delete
       const{id}=req.params
       const tree = await Tree.findByIdAndDelete(id)
        if (!tree) {
@@ -69,7 +63,7 @@ router.delete('/:id',async(req,res)=>{
       res.status(500).json({error:"failed to delete tree"})    
     }
 })
-//PUT
+//PUT =========================================================================================================
 router.put('/:id', async(req,res)=>{
     try {
        const{id}=req.params
@@ -85,6 +79,6 @@ router.put('/:id', async(req,res)=>{
     }
 })
 
-//export the router
+//export the router===============================================================================================
 
 module.exports=router;
