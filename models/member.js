@@ -31,7 +31,7 @@ const memberShema = new mongoose.Schema({
     required: true
   },
   // 1.نربط الشجره بالعائله لنستخدم المكتبه 
-  treeId: {
+  treeCode: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Tree',
     required: true
@@ -40,8 +40,8 @@ const memberShema = new mongoose.Schema({
   // 2. ربط الشخص بوالده 
   parentId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Duck',
-    default: null 
+    ref: 'Member',
+    default: null //اذا اخترنا null يكون الجد 
   }
 })
 
