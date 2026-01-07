@@ -8,8 +8,8 @@ const express = require('express')
 //initialize the router
 const router =express.Router();
 
-const verifyAccess = async (treeCode, code) => {
-    const targetTree = await Tree.findById(treeCode);
+const verifyAccess = async (tree_id, code) => {
+    const targetTree = await Tree.findById(tree_id);
     if (!targetTree)                    
         return { error: "tree is not defined", status: 404 };
     if (targetTree.code !== code) 
@@ -21,8 +21,8 @@ const verifyAccess = async (treeCode, code) => {
 //create a new ..post/ducks/
 router.post('/',async (req,res)=>{
     try{
-        const { treeCode, code } = req.body; 
-        const access = await verifyAccess(treeCode, code);
+        const { tree_id, code } = req.body; 
+        const access = await verifyAccess(tree_id, code);
 
         if (access.error) 
             return res.status(access.status).json({ error: access.error });
@@ -39,9 +39,9 @@ router.post('/',async (req,res)=>{
 router.get('/', async (req, res) => {
   // Setting up for our code
   try{
-   const { treeCode, code } = req.query;
+   const { tree_id, code } = req.query;
     let filter = {};
-       if (treeCode) filter.treeCode = treeCode;//اذا ارسل treeId سيقوم باحضار البط للشجره المحدده 
+       if (tree_id) filter.tree_id = tree_id;//اذا ارسل treeId سيقوم باحضار البط للشجره المحدده 
 
      const member = await Member.find(filter).populate('parentId', 'firstName lastName');//populate-->{ابحث عن الشخص الذي لديه ال ID و احضره لهنا }
      //البارامتر الأولparentId-->(اين نريد تعبئه البيانات )  //البارامتر الثاني ('firstName lastName')-->المعلومات التي نريد تعبئتها 
@@ -73,9 +73,9 @@ router.get('/:id',async(req,res)=>{
 //delete a duck -DEL+/ducks/123
 router.delete('/:id',async(req,res)=>{
     try{
-        const { treeCode, code } = req.body; 
+        const { tree_id, code } = req.body; 
 
-        const access = await verifyAccess(treeCode, code);
+        const access = await verifyAccess(tree_id, code);
         
         if (access.error) return res.status(access.status).json({ error: access.error });
        
@@ -97,9 +97,9 @@ router.delete('/:id',async(req,res)=>{
 //updating - PUT + /ducks/123
 router.put('/:id',async(req,res)=>{
     try{
-        const { treeCode, code } = req.body; 
+        const { tree_id, code } = req.body; 
 
-        const access = await verifyAccess(treeCode, code);
+        const access = await verifyAccess(tree_id, code);
         
         if (access.error) return res.status(access.status).json({ error: access.error });
         
