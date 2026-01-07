@@ -31,7 +31,7 @@ router.post('/',async (req,res)=>{
         res.status(201).json({ member });
     }catch(error){
         console.log(error)
-        res.status(500).json({error:"fail to create duck"}) // 500 means error
+        res.status(500).json({error:"fail to create member"}) // 500 means error
     }
 })
 
@@ -60,13 +60,13 @@ router.get('/:id',async(req,res)=>{
          const {id} =req.params
          const member = await Member.findById(id)
          if(!member){  // if there is no duck wich is null 
-         res.status(404).json({error:'duck not found'})
+         res.status(404).json({error:'member not found'})
          }else{
           res.status(200).json({member})
          }
     }catch(error){
         console.log(error)
-        res.status(500).json({error:'faild to get a duck'})
+        res.status(500).json({error:'faild to get a member'})
     }
 })
 
@@ -81,7 +81,7 @@ router.delete('/:id',async(req,res)=>{
        
         const member = await Member.findByIdAndDelete(req.params.id)  //try to find and delete the duck using the id
         if(!member){      //if there is no duck(not null wich is true), send 404
-            res.status(404).json({error:"Duck not found"})
+            res.status(404).json({error:"member not found"})
         }else{         //else send back a msg ssys deleted
             res.status(200).json({member}) //204 most pouler for deleting it means deleted and no data will be send- json send the duck
         }
@@ -89,7 +89,7 @@ router.delete('/:id',async(req,res)=>{
          }
     catch(error){
         console.log(error)
-        res.status(500).json({error:'faild to get a duck'})
+        res.status(500).json({error:'faild to get a member'})
     }
 })
 
@@ -106,7 +106,7 @@ router.put('/:id',async(req,res)=>{
         const {id}=req.params;
          const member = await Member.findByIdAndUpdate(id,req.body,{new:true})
          if(!member){
-            res.status(404).json({error:"duck not found"})
+            res.status(404).json({error:"member not found"})
          }else{
             res.status(200).json({member})
          }
