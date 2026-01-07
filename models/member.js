@@ -1,4 +1,4 @@
-//requir mogose library
+//requir mongoose library
 const mongoose = require('mongoose');
 
 //creat the mongoose schema
@@ -37,7 +37,6 @@ const memberShema = new mongoose.Schema({
     ref: 'Tree',
     required: true
   },
-
   // 2. ربط الشخص بوالده و نخليه يرتبط باشخاص في نفس السكيما  
   parentId: {
     type: mongoose.Schema.Types.ObjectId,
