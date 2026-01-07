@@ -41,7 +41,7 @@ const memberShema = new mongoose.Schema({
   parentId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Duck',
-    default: null //اذا اخترنا null يكون الجد 
+    default: null 
   }
 })
 
