@@ -76,7 +76,9 @@ router.delete('/:id', async (req, res) => {
         const member = await Member.findByIdAndDelete(req.params.id)  //try to find and delete the duck using the id
         if (!member) {
             res.status(404).json({ error: "member not found" })
-        } else {
+        }
+
+        else {
             res.status(200).json({ member })
         }
 

@@ -31,8 +31,9 @@ app.use('/auth', authCtrl);
 app.use('/tree', treeCtrl);
 
 // Protected Routes
-app.use(verifyToken);
+
 app.use('/member',memberCtrl);
+app.use(verifyToken);
 
 app.get('/test', (req, res) => {
   console.log(req.user);
