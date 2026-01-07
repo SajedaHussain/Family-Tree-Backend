@@ -30,14 +30,14 @@ const memberShema = new mongoose.Schema({
     min: 1, // رقم الجيل اذا1 الجد اذا 2 الاب اذا 3 الاولاد 
     required: true
   },
-  // 1.نربط الشجره بالعائله لنستخدم المكتبه 
-  treeCode: {
+  // 1.ناخذ الايدي مالت الشجرة و نستخدمها في الاسكيمامالت الممبر لان في ربط بينهم بالريفرينس 
+  tree_id: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Tree',
     required: true
   },
 
-  // 2. ربط الشخص بوالده 
+  // 2. ربط الشخص بوالده و نخليه يرتبط باشخاص في نفس السكيما  
   parentId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Member',
