@@ -1,9 +1,9 @@
 const dotenv = require('dotenv');
-
 dotenv.config();
-const express = require('express');
 
+const express = require('express');
 const app = express();
+
 const mongoose = require('mongoose');
 const cors = require('cors');
 const logger = require('morgan');
@@ -28,10 +28,11 @@ app.use(logger('dev'));
 
 // Public Routes
 app.use('/auth', authCtrl);
-app.use('/member',memberCtrl)
 app.use('/tree', treeCtrl);
+
 // Protected Routes
 app.use(verifyToken);
+app.use('/member',memberCtrl);
 
 app.get('/test', (req, res) => {
   console.log(req.user);
