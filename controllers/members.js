@@ -8,10 +8,10 @@ const router = express.Router();
 //ACCESS CODE ====================================================================================================
 const verifyAccess = async (tree_id, code) => {
     const targetTree = await Tree.findById(tree_id);
-    if (!targetTree)
-        return { error: "tree is not defined", status: 404 };
-    if (targetTree.code !== code)
-        return { error: "code is wrong", status: 403 };
+    console.log(tree_id)
+    console.log(targetTree)
+    if (!targetTree) return { error: "tree is not defined", status: 404 };
+    if (targetTree.code !== code) return { error: "code is wrong", status: 403 };
     return { success: true };
 };
 
@@ -20,8 +20,8 @@ router.post('/', async (req, res) => {
     try {
         const { tree_id, code } = req.body;
         const access = await verifyAccess(tree_id, code);
-        if (access.error)
-            return res.status(access.status).json({ error: access.error });
+        
+        if (access.error) return res.status(access.status).json({ error: access.error });
 
         const member = await Member.create(req.body);
         res.status(201).json({ member });
@@ -75,7 +75,9 @@ router.delete('/:id', async (req, res) => {
         const member = await Member.findByIdAndDelete(req.params.id)  //try to find and delete the duck using the id
         if (!member) {
             res.status(404).json({ error: "member not found" })
-        } else {
+        }
+
+        else {
             res.status(200).json({ member })
         }
 
