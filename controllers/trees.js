@@ -19,8 +19,8 @@ router.post('/', async (req, res) => {
 //GET ALL=============================================================================================================
 router.get('/', async (req, res) => {
     try {
-        const tree = await Tree.find({})
-        res.status(200).json({ tree })
+        const trees = await Tree.find({})
+        res.status(200).json({ trees })
     } catch (error) {
         console.log(error)
         res.status(500).json({ error: "failed to get tree" })

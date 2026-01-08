@@ -45,7 +45,7 @@ router.get('/', async (req, res) => {
 
     } catch (error) {
         console.log(error)
-        res.status(500).json({ error: "fail to get member" })
+        res.status(500).json({ error: "fail to get members" })
     }
 });
 
