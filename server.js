@@ -28,11 +28,12 @@ app.use(logger('dev'));
 
 // Public Routes
 app.use('/auth', authCtrl);
-app.use('/tree', treeCtrl);
+app.use('/trees', treeCtrl);
+app.use('/members',memberCtrl);
 
 // Protected Routes
 app.use(verifyToken);
-app.use('/member',memberCtrl);
+
 
 app.get('/test', (req, res) => {
   console.log(req.user);
