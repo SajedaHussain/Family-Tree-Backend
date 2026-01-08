@@ -21,7 +21,7 @@ router.post('/', async (req, res) => {
     try {
         const { tree_id, code } = req.body;
         const access = await verifyAccess(tree_id, code);
-        
+
         if (access.error) return res.status(access.status).json({ error: access.error });
 
         const member = await Member.create(req.body);
@@ -70,23 +70,26 @@ router.get('/:id', async (req, res) => {
 //DELETE =========================================================================================================
 router.delete('/:id', async (req, res) => {
     try {
-        const { tree_id, code } = req.body;
-        const access = await verifyAccess(tree_id, code);
-        if (access.error) return res.status(access.status).json({ error: access.error });
-        const member = await Member.findByIdAndDelete(req.params.id)  //try to find and delete the duck using the id
+        const { id } = req.params;
+        const { code } = req.body;
+
+        const member = await Member.findById(id);
+
         if (!member) {
-            res.status(404).json({ error: "member not found" })
+            return res.status(404).json({ error: "member not found" });
         }
+        const access = await verifyAccess(member.tree_id, code);
 
-        else {
-            res.status(200).json({ member })
+        if (access.error) {
+            return res.status(access.status).json({ error: access.error });
         }
-
+        await Member.findByIdAndDelete(id);
+        res.status(200).json({ message: "Member deleted successfully", member });
     } catch (error) {
-        console.log(error)
-        res.status(500).json({ error: 'faild to get a member' })
+        console.log(error);
+        res.status(500).json({ error: 'failed to delete member' });
     }
-})
+});
 
 //PUT ==============================================================================================================
 router.put('/:id', async (req, res) => {
