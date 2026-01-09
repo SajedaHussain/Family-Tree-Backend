@@ -12,6 +12,7 @@ const logger = require('morgan');
 const authCtrl = require('./controllers/auth');
 const memberCtrl =require('./controllers/members')
 const treeCtrl=require('./controllers/trees')
+const profileCtrl = require('./controllers/profiles');
 
 // Middleware
 const verifyToken = require('./middleware/verify-token');
@@ -30,6 +31,7 @@ app.use(logger('dev'));
 app.use('/auth', authCtrl);
 app.use('/trees', treeCtrl);
 app.use('/members',memberCtrl);
+app.use('/profiles', profileCtrl);
 
 // Protected Routes
 app.use(verifyToken);
