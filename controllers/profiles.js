@@ -1,50 +1,36 @@
 const express = require('express');
 const Profile = require('../models/profile');
-
+const verifyToken = require('../middleware/verify-token'); // هالملف يتحقق من JWT
 const router = express.Router();
 
-// CREATE ====================================================================================================
-router.post('/', async (req, res) => {
+// CREATE OR UPDATE PROFILE ==================================================================
+router.post('/', verifyToken, async (req, res) => {
   try {
-    const profile = await Profile.create(req.body);
-    res.status(201).json({ profile });
-  } catch (err) {
-    res.status(500).json({ error: 'Failed to create profile' });
-  }
-});
+    let profile = await Profile.findOne({ user: req.user._id });
+    if (profile) {
+      profile = await Profile.findByIdAndUpdate(profile._id, req.body, { new: true });
+    } else {
+   
+      profile = await Profile.create({ ...req.body, user: req.user._id });
+    }
 
-// GET all ==========================================================================================
-router.get('/', async (req, res) => {
-  try {
-    const profiles = await Profile.find().populate('tree_id', 'lastName');
-    res.status(200).json({ profiles });
-  } catch (err) {
-    res.status(500).json({ error: 'Failed to get profiles' });
-  }
-});
-
-// GET one ====================================================================================================
-router.get('/:id', async (req, res) => {
-  try {
-    const profile = await Profile.findById(req.params.id);
     res.status(200).json({ profile });
   } catch (err) {
-    res.status(500).json({ error: 'Profile not found' });
+    console.error(err);
+    res.status(500).json({ error: 'Failed to create/update profile' });
   }
 });
 
-// UPDATE ====================================================================================================
-router.put('/:id', async (req, res) => {
+// GET ==============================================================================================
+router.get('/me', verifyToken, async (req, res) => {
   try {
-    const profile = await Profile.findByIdAndUpdate(
-      req.params.id,
-      req.body,
-      { new: true }
-    );
+    const profile = await Profile.findOne({ user: req.user._id }).populate('tree_id', 'lastName');
     res.status(200).json({ profile });
   } catch (err) {
-    res.status(500).json({ error: 'Failed to update profile' });
+    console.error(err);
+    res.status(500).json({ error: 'Failed to get profile' });
   }
 });
 
+//export the router ===============================================================================
 module.exports = router;
