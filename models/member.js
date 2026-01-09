@@ -32,7 +32,7 @@ const memberShema = new mongoose.Schema({
     required: true
   },
   // 1.ناخذ الايدي مالت الشجرة و نستخدمها في الاسكيمامالت الممبر لان في ربط بينهم بالريفرينس 
-  tree_id: {
+  treeId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Tree',
     required: true
