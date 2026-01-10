@@ -34,5 +34,36 @@ router.delete('/:id', async (req, res) => {
   }
 });
 
+// GET ONE =============================================================================================
+router.get('/:id', async (req, res) => {
+  try {
+    const personality = await Personality.findById(req.params.id);
+    if (!personality)
+      return res.status(404).json({ error: 'Not found' });
+
+    res.status(200).json({ personality });
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to fetch' });
+  }
+});
+
+// UPDATE =============================================================================================
+router.put('/:id', async (req, res) => {
+  try {
+    const personality = await Personality.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true }
+    );
+
+    if (!personality)
+      return res.status(404).json({ error: 'Not found' });
+
+    res.status(200).json({ personality });
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to update' });
+  }
+});
+
 //export the router ===============================================================================
 module.exports = router;
