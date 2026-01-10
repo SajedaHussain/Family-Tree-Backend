@@ -13,6 +13,7 @@ const authCtrl = require('./controllers/auth');
 const memberCtrl =require('./controllers/members')
 const treeCtrl=require('./controllers/trees')
 const profileCtrl = require('./controllers/profiles');
+const personalityCtrl = require('./controllers/personalities');
 
 // Middleware
 const verifyToken = require('./middleware/verify-token');
@@ -32,6 +33,7 @@ app.use('/auth', authCtrl);
 app.use('/trees', treeCtrl);
 app.use('/members',memberCtrl);
 app.use('/profiles', profileCtrl);
+app.use('/personalities', personalityCtrl);
 
 // Protected Routes
 app.use(verifyToken);
