@@ -24,7 +24,7 @@ router.post('/', verifyToken, async (req, res) => {
 // GET ==============================================================================================
 router.get('/me', verifyToken, async (req, res) => {
   try {
-    const profile = await Profile.findOne({ user: req.user._id }).populate('tree_id', 'lastName');
+    const profile = await Profile.findOne({ user: req.user._id });
     res.status(200).json({ profile });
   } catch (err) {
     console.error(err);

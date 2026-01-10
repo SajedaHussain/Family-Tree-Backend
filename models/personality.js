@@ -8,6 +8,12 @@ const personalitySchema = new mongoose.Schema({
   personalityType: {
     type: String,
     required: true, 
+    // enum: [
+    //         "INTJ", "INTP", "ENTJ", "ENTP",
+    //         "INFJ", "INFP", "ENFJ", "ENFP",
+    //         "ISTJ", "ISFJ", "ESTJ", "ESFJ",
+    //         "ISTP", "ISFP", "ESTP", "ESFP"
+    //     ]
   },
   occupation: {
     type: String,
