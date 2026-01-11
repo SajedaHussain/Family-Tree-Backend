@@ -3,6 +3,7 @@
 ## Screenshot/Logo :
 
 ![alt text](./assets/landing.jpeg)
+![alt text](./assets/dashboard.jpeg)
 
 ## App's name:
 
