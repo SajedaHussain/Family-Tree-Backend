@@ -23,9 +23,10 @@ Link to the front-end repository :
 ## Attributions:
 
 external resources such as libraries or assets.
+library used :
 
-- library used : react-d3-tree.
--
+- react-d3-tree.
+- sweetalert2
 
 ## Technologies used:
 
