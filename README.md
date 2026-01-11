@@ -4,6 +4,7 @@
 
 ![alt text](./assets/landing.jpeg)
 ![alt text](./assets/dashboard.jpeg)
+![alt text](./assets/tree.jpeg)
 
 ## App's name:
 
