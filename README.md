@@ -41,4 +41,4 @@ library used :
 
 Planned future enhancements :
 
--
+- If we had more time, we would add colors to the node borders — pink for girls and blue for boys — and make twin nodes connected together.
