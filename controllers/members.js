@@ -5,7 +5,6 @@ const Tree = require('../models/tree');
 //initialize the router ==========================================================================================
 const router = express.Router();
 
-
 //ACCESS CODE ====================================================================================================
 const verifyAccess = async (treeId, code) => {
     const targetTree = await Tree.findById(treeId);
