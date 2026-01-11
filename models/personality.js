@@ -1,5 +1,7 @@
+//requir mongoose library ================================================================================
 const mongoose = require('mongoose');
 
+//creat the mongoose schema ===============================================================================
 const personalitySchema = new mongoose.Schema({
   name: {
     type: String,
@@ -25,4 +27,9 @@ const personalitySchema = new mongoose.Schema({
   timestamps: true
 });
 
-module.exports = mongoose.model('Personality', personalitySchema);
+
+//initialize the mogose model ==============================================================================
+const Personality =mongoose.model('Personality', personalitySchema);
+
+//export the model =========================================================================================
+module.exports = Personality

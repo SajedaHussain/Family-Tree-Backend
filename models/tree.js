@@ -1,7 +1,7 @@
-//requir mongoose library
+//requir mongoose library =================================================================================
 const mongoose = require('mongoose');
 
-//creat the mongoose schema
+//creat the mongoose schema ===============================================================================
 const treeSchema = new mongoose.Schema({
   lastName: {
     type: String,
@@ -18,8 +18,9 @@ const treeSchema = new mongoose.Schema({
     required: true,
   },
 });
-//initialize the mogose model
+
+//initialize the mogose model ==============================================================================
 const Tree= mongoose.model("Tree",treeSchema)
 
-//export the model
+//export the model =========================================================================================
 module.exports = Tree

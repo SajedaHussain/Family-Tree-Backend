@@ -1,5 +1,7 @@
+//requir mongoose library =================================================================================
 const mongoose = require('mongoose');
 
+//creat the mongoose schema ===============================================================================
 const profileSchema = new mongoose.Schema({
     user: {
         type: mongoose.Schema.Types.ObjectId,
@@ -20,4 +22,8 @@ const profileSchema = new mongoose.Schema({
     timestamps: true
 });
 
-module.exports = mongoose.model('Profile', profileSchema);
+//initialize the mogose model ==============================================================================
+const Profile =mongoose.model('Profile', profileSchema);
+
+//export the model =========================================================================================
+module.exports = Profile

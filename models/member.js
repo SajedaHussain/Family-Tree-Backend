@@ -1,7 +1,7 @@
-//requir mongoose library
+//requir mongoose library ==================================================================================
 const mongoose = require('mongoose');
 
-//creat the mongoose schema
+//creat the mongoose schema =================================================================================
 const memberShema = new mongoose.Schema({
   firstName: {
     type: String,
@@ -50,9 +50,9 @@ const memberShema = new mongoose.Schema({
   }
 })
 
-//initialize the mogose model
+//initialize the mogose model =============================================================================
 const Member = mongoose.model('Member', memberShema)
 
-//export the model
+//export the model =========================================================================================
 module.exports = Member;
 

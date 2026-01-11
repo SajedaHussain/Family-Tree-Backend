@@ -1,26 +1,27 @@
 const express = require('express');
+//require the moudle =========================================================================
 const Personality = require('../models/personality');
-
+//inilialize the router ======================================================================
 const router = express.Router();
 
-const personalityImages = {
-    INTJ: "/images/intj.png",
-    INFP: "/images/infp.png",
-    ENFP: "/images/enfp.png",
-    INTP: "/images/intp.png",
-    ENTJ: "/images/entj.png",
-    ENTP: "/images/entp.png",
-    INFJ: "/images/infj.png",
-    ENFJ: "/images/enfj.png",
-    ISTJ: "/images/istj.png",
-    ISFJ: "/images/isfj.png",
-    ESTJ: "/images/estj.png",
-    ESFJ: "/images/esfj.png",
-    ISTP: "/images/istp.png",
-    ISFP: "/images/isep.png",
-    ESTP: "/images/estp.png",
-    ESFP: "/images/esfp.png",
-};
+// const personalityImages = {
+//     INTJ: "/images/intj.png",
+//     INFP: "/images/infp.png",
+//     ENFP: "/images/enfp.png",
+//     INTP: "/images/intp.png",
+//     ENTJ: "/images/entj.png",
+//     ENTP: "/images/entp.png",
+//     INFJ: "/images/infj.png",
+//     ENFJ: "/images/enfj.png",
+//     ISTJ: "/images/istj.png",
+//     ISFJ: "/images/isfj.png",
+//     ESTJ: "/images/estj.png",
+//     ESFJ: "/images/esfj.png",
+//     ISTP: "/images/istp.png",
+//     ISFP: "/images/isep.png",
+//     ESTP: "/images/estp.png",
+//     ESFP: "/images/esfp.png",
+// };
 
 // CREATE ======================================================================================
 router.post('/', async (req, res) => {
@@ -53,7 +54,7 @@ router.delete('/:id', async (req, res) => {
     }
 });
 
-// GET ONE =============================================================================================
+// GET ONE =====================================================================================
 router.get('/:id', async (req, res) => {
     try {
         const personality = await Personality.findById(req.params.id);
@@ -66,7 +67,7 @@ router.get('/:id', async (req, res) => {
     }
 });
 
-// UPDATE =============================================================================================
+// UPDATE =======================================================================================
 router.put('/:id', async (req, res) => {
     try {
         const personality = await Personality.findByIdAndUpdate(
