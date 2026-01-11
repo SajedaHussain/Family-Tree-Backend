@@ -5,6 +5,7 @@
 ![alt text](./assets/landing.jpeg)
 ![alt text](./assets/dashboard.jpeg)
 ![alt text](./assets/tree.jpeg)
+![alt text](./assets/profile1.jpeg)
 
 ## App's name:
 
