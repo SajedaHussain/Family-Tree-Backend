@@ -14,6 +14,9 @@ The website allows users to create a family tree consisting of a group of member
 
 ## Getting started:
 
+Link to the ERD :
+![alt text](./assets/family%20tree%20ERD.jpeg)
+
 Link to the front-end repository :
 [ link](https://github.com/SajedaHussain/Family-Tree_Frontend.git)
 
