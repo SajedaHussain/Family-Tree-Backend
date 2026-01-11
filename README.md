@@ -1,10 +1,8 @@
 # Project 3 : Family-Tree-Backend
 
-## Description
-
 ## Screenshot/Logo :
 
-![alt text]()
+![alt text](./assets/landing.jpeg)
 
 ## App's name:
 
