@@ -1,6 +1,9 @@
 const express = require('express');
+//require the moudle =========================================================================
 const Profile = require('../models/profile');
-const verifyToken = require('../middleware/verify-token'); // هالملف يتحقق من JWT
+//inilialize the verify Token ================================================================
+const verifyToken = require('../middleware/verify-token');
+//inilialize the router ======================================================================
 const router = express.Router();
 
 // CREATE OR UPDATE PROFILE ==================================================================

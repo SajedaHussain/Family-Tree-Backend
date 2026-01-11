@@ -1,8 +1,8 @@
 const express = require('express')
-//requir the model
+//requir the model ===============================================================================================
 const Member = require('../models/member');
 const Tree = require('../models/tree');
-//initialize the router
+//initialize the router ==========================================================================================
 const router = express.Router();
 
 
