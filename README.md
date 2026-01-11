@@ -34,7 +34,8 @@ library used :
 - HTML.
 - CSS .
 - JSC.
--
+- JSX
+- Google Gemini
 
 ## Next steps:
 
