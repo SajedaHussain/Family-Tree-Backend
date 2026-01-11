@@ -15,7 +15,7 @@ const memberShema = new mongoose.Schema({
   },
   relation: {
     type: String,
-    enum: ["Grandparents","Parents","Son","Daughter"],
+    enum: ["Grandparents", "Parents", "Son", "Daughter"],
     required: true
   },
   dateOfBirth: {
@@ -24,7 +24,7 @@ const memberShema = new mongoose.Schema({
   },
   image: {
     type: String,
-   /* required: true*/
+    /* required: true*/
   },
   generation: {
     type: Number,
@@ -32,7 +32,7 @@ const memberShema = new mongoose.Schema({
     required: true
   },
   // 1.ناخذ الايدي مالت الشجرة و نستخدمها في الاسكيمامالت الممبر لان في ربط بينهم بالريفرينس 
-  tree_id: {
+  treeId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Tree',
     required: true
@@ -42,6 +42,11 @@ const memberShema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Member',
     default: null //اذا اخترنا null يكون الجد 
+  },
+  code: {
+    type: String,
+    required: true,
+    trim: true
   }
 })
 

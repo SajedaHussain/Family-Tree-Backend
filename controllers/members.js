@@ -7,9 +7,9 @@ const router = express.Router();
 
 
 //ACCESS CODE ====================================================================================================
-const verifyAccess = async (tree_id, code) => {
-    const targetTree = await Tree.findById(tree_id);
-    console.log(tree_id)
+const verifyAccess = async (treeId, code) => {
+    const targetTree = await Tree.findById(treeId);
+    console.log(treeId)
     console.log(targetTree)
     if (!targetTree) return { error: "tree is not defined", status: 404 };
     if (targetTree.code !== code) return { error: "code is wrong", status: 403 };
@@ -19,9 +19,9 @@ const verifyAccess = async (tree_id, code) => {
 //POST ===========================================================================================================
 router.post('/', async (req, res) => {
     try {
-        const { tree_id, code } = req.body;
-        const access = await verifyAccess(tree_id, code);
-
+        const { treeId, code } = req.body;
+        const access = await verifyAccess(treeId, code);
+        
         if (access.error) return res.status(access.status).json({ error: access.error });
 
         const member = await Member.create(req.body);
@@ -36,9 +36,9 @@ router.post('/', async (req, res) => {
 // GET ALL =====================================================================================================
 router.get('/', async (req, res) => {
     try {
-        const { tree_id } = req.query;
+        const { treeId } = req.query;
         let filter = {};
-        if (tree_id) filter.tree_id = tree_id;//اذا ارسل treeId سيقوم باحضار البط للشجره المحدده 
+        if (treeId) filter.treeId = treeId;//اذا ارسل treeId سيقوم باحضار البط للشجره المحدده 
         const member = await Member.find(filter).populate('parentId', 'firstName lastName');//populate-->{ابحث عن الشخص الذي لديه ال ID و احضره لهنا }
         //البارامتر الأولparentId-->(اين نريد تعبئه البيانات )  //البارامتر الثاني ('firstName lastName')-->المعلومات التي نريد تعبئتها 
         res.status(200).json({ member });
@@ -68,34 +68,29 @@ router.get('/:id', async (req, res) => {
 })
 
 //DELETE =========================================================================================================
-router.delete('/:id', async (req, res) => {
-    try {
-        const { id } = req.params;
-        const { code } = req.body;
+router.delete('/:id/:treeId', async (req, res) => {
+  try {
+    const { id, treeId } = req.params;
+    const { code } = req.query;
 
-        const member = await Member.findById(id);
+    const access = await verifyAccess(treeId, code);
+    if (access.error) return res.status(access.status).json({ error: access.error });
 
-        if (!member) {
-            return res.status(404).json({ error: "member not found" });
-        }
-        const access = await verifyAccess(member.tree_id, code);
+    const member = await Member.findByIdAndDelete(id);
+    if (!member) return res.status(404).json({ error: "member not found" });
 
-        if (access.error) {
-            return res.status(access.status).json({ error: access.error });
-        }
-        await Member.findByIdAndDelete(id);
-        res.status(200).json({ message: "Member deleted successfully", member });
-    } catch (error) {
-        console.log(error);
-        res.status(500).json({ error: 'failed to delete member' });
-    }
+    res.status(200).json({ member });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: 'failed to delete member' });
+  }
 });
 
 //PUT ==============================================================================================================
 router.put('/:id', async (req, res) => {
     try {
-        const { tree_id, code } = req.body;
-        const access = await verifyAccess(tree_id, code);
+        const { treeId, code } = req.body;
+        const access = await verifyAccess(treeId, code);
         if (access.error) return res.status(access.status).json({ error: access.error });
         const { id } = req.params;
         const member = await Member.findByIdAndUpdate(id, req.body, { new: true })
@@ -111,7 +106,7 @@ router.put('/:id', async (req, res) => {
     }
 })
 
-//export the router
+//export the router ===============================================================================
 module.exports = router;
 
 
